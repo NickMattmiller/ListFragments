@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.app.Activity;
+
+import com.wesleyreisz.mymusic.model.Song;
+
 import java.util.List;
 
 public class SongListAdapter extends ArrayAdapter {
@@ -30,7 +33,7 @@ public class SongListAdapter extends ArrayAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        SongListItem item = (SongListItem) getItem(position);
+        Song item = (Song) getItem(position);
         View viewToUse = null;
 
         LayoutInflater mInflater = (LayoutInflater) context
@@ -50,7 +53,7 @@ public class SongListAdapter extends ArrayAdapter {
             holder = (ViewHolder) viewToUse.getTag();
         }
 
-        holder.titleText.setText(item.getItemTitle());
+        holder.titleText.setText(item.getSongTitle() +" - " + item.getArtistName() + "\n");
         return viewToUse;
     }
 }

@@ -17,6 +17,9 @@ import com.wesleyreisz.mymusic.R;
 import com.wesleyreisz.mymusic.fragments.dummy.DummyContent;
 import com.wesleyreisz.mymusic.SongListItem;
 import com.wesleyreisz.mymusic.SongListAdapter;
+import com.wesleyreisz.mymusic.model.Song;
+import com.wesleyreisz.mymusic.service.MockMusicService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +53,7 @@ public class SongFragment extends Fragment implements AbsListView.OnItemClickLis
      */
     private AbsListView mListView;
 
-    /**
-     * The Adapter which will be used to populate the ListView/GridView with
-     * Views.
-     */
+
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
@@ -77,10 +77,15 @@ public class SongFragment extends Fragment implements AbsListView.OnItemClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        MockMusicService service = new MockMusicService();
+        List<Song> songs = service.findAll();
+
+
         songListItemList = new ArrayList();
-        songListItemList.add(new SongListItem("Example 1"));
-        songListItemList.add(new SongListItem("Example 2"));
-        songListItemList.add(new SongListItem("Example 3"));
+        songListItemList.addAll(songs);
+       // songListItemList.add(new SongListItem("Example 1"));
+       // songListItemList.add(new SongListItem("Example 2"));
+      //  songListItemList.add(new SongListItem("Example 3"));
         mAdapter = new SongListAdapter(getActivity(), songListItemList);
     }
 
@@ -118,9 +123,11 @@ public class SongFragment extends Fragment implements AbsListView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        SongListItem item = (SongListItem)this.songListItemList.get(position);
-        Toast.makeText(getActivity(), item.getItemTitle() + " Clicked!"
-                , Toast.LENGTH_SHORT).show();
+        Song item = (Song)this.songListItemList.get(position);
+        Toast.makeText(getActivity(),"Title: \t" + item.getSongTitle() +
+                                    "\nArtist: \t" + item.getArtistName() +
+                                     "\nAlbum: \t"+ item.getAlbumTitle() +
+                                     "\nPublished Date: \t" + item.getSongPublishedDate(), Toast.LENGTH_LONG).show();
     }
 
 

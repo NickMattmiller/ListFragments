@@ -25,7 +25,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
         boolean testResultFound=false;
         for(Song song:songs){
-            if (song.getAlbumTitle().equalsIgnoreCase("Dark Horse")){
+            if (song.getAlbumTitle().equalsIgnoreCase("Single")){
                 testResultFound=true;
             }
         }
@@ -35,7 +35,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public void testFindOne(){
         MockMusicService service = new MockMusicService();
         Song song = service.findOne("Dark Horse");
-        Assert.assertEquals("Dark Horse", song.getAlbumTitle());
+        //changed to song title
+        Assert.assertEquals("Dark Horse", song.getSongTitle());
         Assert.assertEquals("Katy Perry", song.getArtistName());
         Assert.assertEquals("Single", song.getAlbumTitle());
     }

@@ -4,14 +4,24 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.wesleyreisz.mymusic.SongListAdapter;
+import com.wesleyreisz.mymusic.fragments.SongFragment;
+import com.wesleyreisz.mymusic.MyMusicActivity;
+import com.wesleyreisz.mymusic.R;
 
-
-public class MyMusicActivity extends Activity {
+public class MyMusicActivity extends Activity implements SongFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_music);
+
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new SongFragment())
+                    .commit();
+        }
+
     }
 
 
@@ -35,5 +45,10 @@ public class MyMusicActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+
     }
 }
